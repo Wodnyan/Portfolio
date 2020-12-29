@@ -1,0 +1,11 @@
+.window {
+  height: 50px;
+  min-width: 250px;
+  background: white;
+  position: absolute;
+  .top-bar {
+    height: 25px;
+    background: black;
+    cursor: move;
+  }
+}

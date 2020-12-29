@@ -1,1 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+
 @import "./components/_button.scss";
+@import "./components/_time.scss";
+@import "./components/_taskbar.scss";
+@import "./components/_screen.scss";
+@import "./components/_window.scss";
+
+@import "./base/_reset.scss";
+
+@import "./layout/_app.scss";

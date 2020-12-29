@@ -1,0 +1,8 @@
+@import "../utilities/_variables";
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  background: $windows-grey;
+}
