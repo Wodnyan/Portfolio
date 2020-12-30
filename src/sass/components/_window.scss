@@ -1,7 +1,7 @@
 @import "../utilities/_variables.scss";
 @import "../components/_button.scss";
 
-$btn-dimensions: 25px;
+$btn-dimensions: 20px;
 
 .window {
   position: absolute;
@@ -27,6 +27,7 @@ $btn-dimensions: 25px;
       @extend .btn;
       width: $btn-dimensions;
       height: $btn-dimensions;
+      font-size: 12px;
       margin-left: 1.5px;
       display: flex;
       align-items: center;

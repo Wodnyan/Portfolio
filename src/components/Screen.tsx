@@ -4,7 +4,9 @@ import Window from "./Window";
 const Screen = () => {
   return (
     <main className="screen">
-      <Window minimizeBtn maximizeBtn />
+      <Window windowName="hello" minimizeBtn maximizeBtn>
+        hello
+      </Window>
     </main>
   );
 };
