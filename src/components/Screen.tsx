@@ -3,10 +3,8 @@ import Window from "./Window";
 
 const Screen = () => {
   return (
-    <main
-      className="screen"
-    >
-      <Window />
+    <main className="screen">
+      <Window minimizeBtn maximizeBtn />
     </main>
   );
 };

@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-const useDrag = (ref: any, handle?: any) => {
+const useDrag = (ref: any) => {
+  const handleRef = useRef(null);
+
   useEffect(() => {
     const target = ref.current;
     if (!target) {
@@ -18,10 +20,9 @@ const useDrag = (ref: any, handle?: any) => {
       initialX = e.clientX - offsetX;
       initialY = e.clientY - offsetY;
       // If there is a handler and the target isn't the handler than do nothing
-      console.log(handle && e.target != handle);
-      if (handle && e.target !== handle.current) {
+      if (handleRef.current !== null && e.target !== handleRef.current) {
         return;
-      } 
+      }
       window.addEventListener("mouseup", onMouseUp);
       window.addEventListener("mousemove", onMouseMove);
     }
@@ -46,7 +47,8 @@ const useDrag = (ref: any, handle?: any) => {
       target.removeEventListener("mousedown", onMouseDown);
       target.removeEventListener("mouseup", onMouseUp);
     };
-  }, [ref]);
+  }, [ref, handleRef]);
+  return { handleRef };
 };
 
 export default useDrag;

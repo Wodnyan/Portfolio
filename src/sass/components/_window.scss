@@ -1,11 +1,36 @@
+@import "../utilities/_variables.scss";
+@import "../components/_button.scss";
+
+$btn-dimensions: 25px;
+
 .window {
-  height: 50px;
-  min-width: 250px;
-  background: white;
   position: absolute;
+  height: 50px;
+  min-width: 300px;
+  padding: 5px;
+  height: auto;
+  background: $windows-grey;
   .top-bar {
     height: 25px;
-    background: black;
+    background: $windows-terminal-blue;
     cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__info {
+      color: #fff;
+    }
+    &__btn-group {
+      display: flex;
+    }
+    &__btn {
+      @extend .btn;
+      width: $btn-dimensions;
+      height: $btn-dimensions;
+      margin-left: 1.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
