@@ -1,8 +1,40 @@
 @import "../utilities/_variables";
 
 .taskbar {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0.3rem;
   background: $windows-grey;
+
+  .start-menu {
+    position: absolute;
+    top: 0;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    transform: translate(0, -100%);
+    border-style: solid;
+    border-width: 3px;
+    border-color: #fff #000 #000 #fff;
+    .temp {
+      writing-mode: sideways-lr;
+      text-orientation: mixed;
+      background: purple;
+    }
+    .apps-list {
+      list-style-type: none;
+      width: 100%;
+      background: red;
+      &__item {
+        padding: 1rem 1rem 1rem 0.5rem;
+        background: $windows-grey;
+        width: 100%;
+        cursor: pointer;
+        &:hover {
+          background: $windows-terminal-blue;
+          color: #fff;
+        }
+      }
+    }
+  }
 }

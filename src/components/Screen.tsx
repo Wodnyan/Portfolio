@@ -1,5 +1,6 @@
 import React from "react";
 import Window from "./Window";
+import { connect } from "react-redux";
 
 const Screen = () => {
   return (
@@ -11,4 +12,10 @@ const Screen = () => {
   );
 };
 
-export default Screen;
+function mapStateToProps(state: any) {
+  const { windows } = state;
+  return { windows };
+}
+
+//export default Screen;
+export default connect(mapStateToProps)(Screen);
