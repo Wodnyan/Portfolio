@@ -2,11 +2,17 @@ import React, { useRef } from "react";
 import useDrag from "../hooks/useDrag";
 
 interface Props {
+  windowName: string;
   minimizeBtn?: boolean;
   maximizeBtn?: boolean;
 }
 
-const Window: React.FC<Props> = ({ maximizeBtn, minimizeBtn }) => {
+const Window: React.FC<Props> = ({
+  maximizeBtn,
+  minimizeBtn,
+  windowName,
+  children,
+}) => {
   const dragRef = useRef(null);
   const { handleRef } = useDrag(dragRef);
 
@@ -14,7 +20,7 @@ const Window: React.FC<Props> = ({ maximizeBtn, minimizeBtn }) => {
     <div ref={dragRef} className="window">
       <div draggable={false} ref={handleRef} className="top-bar">
         <div className="top-bar__info">
-          <p>Welcome</p>
+          <p>{windowName}</p>
         </div>
         <div className="top-bar__btn-group">
           {minimizeBtn && (
@@ -26,6 +32,7 @@ const Window: React.FC<Props> = ({ maximizeBtn, minimizeBtn }) => {
           <i className="fas fa-times top-bar__btn"></i>
         </div>
       </div>
+      {children}
     </div>
   );
 };
