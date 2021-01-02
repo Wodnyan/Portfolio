@@ -1,21 +1,31 @@
 import React, { useState } from "react";
 import Time from "./Time";
+import { Window } from "../types";
+import { connect, useDispatch } from "react-redux";
+import { ADD_WINDOW, TOGGLE_WINDOW } from "../redux/actions/windowsActions";
+import apps from "../data/apps.json";
 
 interface StartButtonProps {
   toggleStartMenu: () => void;
   isActive: boolean;
 }
 
-interface StartMenuItemProps {
-  children: React.ReactNode;
+interface Props {
+  windows: [] | Window[];
 }
 
-const Taskbar = () => {
+interface StartMenuItemProps {
+  children: React.ReactNode;
+  icon?: string;
+  onClick?: () => void;
+}
+
+const Taskbar: React.FC<Props> = ({ windows }) => {
   const [showStartMenu, setShowStartMenu] = useState(true);
 
   return (
     <header className="taskbar">
-      {showStartMenu && <StartMenu />}
+      {showStartMenu && <StartMenu windows={windows} />}
       <StartButton
         isActive={showStartMenu}
         toggleStartMenu={() => setShowStartMenu((prev) => !prev)}
@@ -25,20 +35,60 @@ const Taskbar = () => {
   );
 };
 
-const StartMenu = () => {
+const StartMenu: React.FC<Props> = ({ windows }) => {
+  const dispatch = useDispatch();
   const StartMenuTemp = () => <h1 className="temp">Albert Gergő</h1>;
-  const StartMenuItem: React.FC<StartMenuItemProps> = ({ children }) => (
-    <li className="apps-list__item">{children}</li>
+  const StartMenuItem: React.FC<StartMenuItemProps> = ({
+    children,
+    icon,
+    onClick,
+  }) => (
+    <li onClick={onClick} className="apps-list__item">
+      {icon && (
+        <span>
+          <img alt="application icon" src={icon} />
+        </span>
+      )}
+      <span>{children}</span>
+    </li>
   );
+
+  const handleClick = (id: number, name: string, icon: string) => {
+    const exists = windows.find((window) => window.id === id);
+    console.log(windows);
+    if (exists) {
+      dispatch(TOGGLE_WINDOW(id));
+    } else {
+      dispatch(
+        ADD_WINDOW({
+          id,
+          name,
+          icon,
+          show: true,
+        })
+      );
+    }
+  };
+
   return (
     <div className="start-menu">
       <StartMenuTemp />
       <ul className="apps-list">
-        <StartMenuItem>Projects</StartMenuItem>
-        <StartMenuItem>About</StartMenuItem>
-        <StartMenuItem>Contacts</StartMenuItem>
-        <StartMenuItem>CV</StartMenuItem>
-        <StartMenuItem>ShutDown</StartMenuItem>
+        {apps.apps.map((app) => (
+          <StartMenuItem
+            onClick={() => handleClick(app.id, app.name, app.icon)}
+            icon={app.icon}
+            key={app.id}
+          >
+            {app.name}
+          </StartMenuItem>
+        ))}
+        <StartMenuItem
+          onClick={() => console.log("Close Window")}
+          icon="images/shutdown.ico"
+        >
+          Shutdown
+        </StartMenuItem>
       </ul>
     </div>
   );
@@ -61,4 +111,13 @@ const StartButton: React.FC<StartButtonProps> = ({
   );
 };
 
-export default Taskbar;
+const mapStateToProps = (state: any) => {
+  const { windows } = state;
+  return { windows };
+};
+
+//export default Taskbar;
+export default connect(mapStateToProps, {
+  ADD_WINDOW,
+  TOGGLE_WINDOW,
+})(Taskbar);
