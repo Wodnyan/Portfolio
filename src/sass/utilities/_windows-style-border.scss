@@ -1,0 +1,11 @@
+$border-white: #fff;
+$border-black: #000;
+
+@mixin windows-style-border($border-width: 2px, $inverted: false) {
+  border-color: $border-white $border-black $border-black $border-white;
+  @if $inverted {
+    border-color: $border-black $border-white $border-white $border-black;
+  }
+  border-style: solid;
+  border-width: $border-width;
+}

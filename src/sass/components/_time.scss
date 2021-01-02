@@ -1,8 +1,8 @@
+@import "../utilities/_windows-style-border.scss"; 
+
 .time {
+  @include windows-style-border($inverted: true);
   margin-left: auto;
-  border-color: #000 #fff #fff #000;
-  border-width: 2px;
-  border-style: solid;
   font-size: 1.2rem;
   padding: 5px;
 }

@@ -30,9 +30,14 @@ const Taskbar: React.FC<Props> = ({ windows }) => {
         isActive={showStartMenu}
         toggleStartMenu={() => setShowStartMenu((prev) => !prev)}
       />
+      <ActiveApps />
       <Time />
     </header>
   );
+};
+
+const ActiveApps = () => {
+  return <h1>Test</h1>;
 };
 
 const StartMenu: React.FC<Props> = ({ windows }) => {
