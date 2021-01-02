@@ -1,25 +1,22 @@
 @import "../utilities/_variables.scss";
+@import "../utilities/_windows-style-border.scss";
 
 $btn-icon-size: 30px;
 
 .btn {
+  @include windows-style-border();
   background: $windows-grey;
   display: flex;
   align-items: center;
   padding: 0.2rem;
-  //min-width: 110px;
   font-size: 1.2rem;
   outline: none;
-  border: none;
   cursor: pointer;
-  border-color: #fff #000 #000 #fff;
-  border-style: solid;
-  border-width: 2px;
   &:active {
-    border-color: #000 #fff #fff #000;
+    @include windows-style-border($inverted: true);
   }
   &--active {
-    border-color: #000 #fff #fff #000;
+    @include windows-style-border($inverted: true);
   }
   .btn__icon {
     display: block;
