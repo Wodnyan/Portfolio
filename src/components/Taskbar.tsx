@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Time from "./Time";
 import { Window } from "../types";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { ADD_WINDOW, TOGGLE_WINDOW } from "../redux/actions/windowsActions";
 import apps from "../data/apps.json";
 
@@ -37,7 +37,25 @@ const Taskbar: React.FC<Props> = ({ windows }) => {
 };
 
 const ActiveApps = () => {
-  return <h1>Test</h1>;
+  const windows = useSelector((state: any) => state.windows);
+  const dispatch = useDispatch();
+
+  const toggleWindow = (id: number) => {
+    dispatch(TOGGLE_WINDOW(id));
+  };
+
+  return (windows as Window[]).map((window) => (
+    <button
+      key={window.id}
+      className={`btn btn--taskbar ${window.show ? "btn--active" : ""}`}
+      onClick={() => toggleWindow(window.id)}
+    >
+      <div className="btn__icon">
+        <img src={window.icon} alt="windows 95 logo" />
+      </div>
+      <span>{window.name}</span>
+    </button>
+  ));
 };
 
 const StartMenu: React.FC<Props> = ({ windows }) => {
