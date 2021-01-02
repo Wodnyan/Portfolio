@@ -18,6 +18,11 @@ $btn-icon-size: 30px;
   &--active {
     @include windows-style-border($inverted: true);
   }
+  &--taskbar {
+    min-width: 150px;
+    height: 100%;
+    margin: 0 5px;
+  }
   .btn__icon {
     display: block;
     width: $btn-icon-size;
