@@ -1,13 +1,18 @@
 import React, { useRef } from "react";
 import useDrag from "../hooks/useDrag";
+import { connect, useDispatch } from "react-redux";
+import { REMOVE_WINDOW } from "../redux/actions/windowsActions";
 
 interface Props {
+  id: number;
   windowName: string;
+  children: React.ReactNode;
   minimizeBtn?: boolean;
   maximizeBtn?: boolean;
 }
 
 const Window: React.FC<Props> = ({
+  id,
   maximizeBtn,
   minimizeBtn,
   windowName,
@@ -15,6 +20,11 @@ const Window: React.FC<Props> = ({
 }) => {
   const dragRef = useRef(null);
   const { handleRef } = useDrag(dragRef);
+  const dispatch = useDispatch();
+
+  const closeWindow = () => {
+    dispatch(REMOVE_WINDOW(id));
+  };
 
   return (
     <div ref={dragRef} className="window">
@@ -29,7 +39,7 @@ const Window: React.FC<Props> = ({
           {maximizeBtn && (
             <i className="far fa-window-maximize top-bar__btn"></i>
           )}
-          <i className="fas fa-times top-bar__btn"></i>
+          <i onClick={closeWindow} className="fas fa-times top-bar__btn"></i>
         </div>
       </div>
       {children}
@@ -37,4 +47,4 @@ const Window: React.FC<Props> = ({
   );
 };
 
-export default Window;
+export default connect(null, { REMOVE_WINDOW })(Window);

@@ -16,6 +16,7 @@ const Screen: React.FC<Props> = ({ windows }) => {
           window.show && (
             <Window
               key={window.id}
+              id={window.id}
               windowName={window.name}
               minimizeBtn
               maximizeBtn
