@@ -1,11 +1,8 @@
-let windowId = 0;
+import { Window } from "../../types";
 
-export const ADD_WINDOW = (window: any) => ({
+export const ADD_WINDOW = (window: Window) => ({
   type: "ADD_WINDOW",
-  payload: {
-    id: windowId++,
-    ...window,
-  },
+  payload: window,
 });
 
 export const REMOVE_WINDOW = (windowId: number) => ({

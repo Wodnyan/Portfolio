@@ -26,10 +26,16 @@
       width: 100%;
       background: red;
       &__item {
-        padding: 1rem 1rem 1rem 0.5rem;
-        background: $windows-grey;
+        padding: 1rem 2rem 1rem 0.5rem;
         width: 100%;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: $windows-grey;
+        img {
+          width: 30px;
+          margin: 0 7px;
+        }
         &:hover {
           background: $windows-terminal-blue;
           color: #fff;

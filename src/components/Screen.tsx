@@ -1,13 +1,29 @@
 import React from "react";
 import Window from "./Window";
+import About from "./Apps/About";
 import { connect } from "react-redux";
+import * as T from "../types";
 
-const Screen = () => {
+interface Props {
+  windows: [] | T.Window[];
+}
+
+const Screen: React.FC<Props> = ({ windows }) => {
   return (
     <main className="screen">
-      <Window windowName="hello" minimizeBtn maximizeBtn>
-        hello
-      </Window>
+      {(windows as T.Window[]).map(
+        (window) =>
+          window.show && (
+            <Window
+              key={window.id}
+              windowName={window.name}
+              minimizeBtn
+              maximizeBtn
+            >
+              <About />
+            </Window>
+          )
+      )}
     </main>
   );
 };
