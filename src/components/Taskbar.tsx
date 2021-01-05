@@ -3,7 +3,7 @@ import Time from "./Time";
 import { Window } from "../types";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { ADD_WINDOW, TOGGLE_WINDOW } from "../redux/actions/windowsActions";
-import apps from "../data/apps.json";
+import { apps } from "../constants";
 
 interface StartButtonProps {
   toggleStartMenu: () => void;
@@ -101,7 +101,7 @@ const StartMenu: React.FC<Props> = ({ windows }) => {
     <div className="start-menu">
       <StartMenuTemp />
       <ul className="apps-list">
-        {apps.apps.map((app) => (
+        {apps.map((app) => (
           <StartMenuItem
             onClick={() => handleClick(app.id, app.name, app.icon)}
             icon={app.icon}

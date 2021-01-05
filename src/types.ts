@@ -10,3 +10,10 @@ export interface Position {
   x: number;
   y: number;
 }
+
+export enum Apps {
+  About = 0,
+  Projects,
+  Contacts,
+  CV,
+}
