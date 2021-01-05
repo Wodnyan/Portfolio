@@ -3,7 +3,7 @@ import Time from "./Time";
 import { Window } from "../types";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { ADD_WINDOW, TOGGLE_WINDOW } from "../redux/actions/windowsActions";
-import apps from "../data/apps.json";
+import { apps } from "../constants";
 
 interface StartButtonProps {
   toggleStartMenu: () => void;
@@ -44,18 +44,22 @@ const ActiveApps = () => {
     dispatch(TOGGLE_WINDOW(id));
   };
 
-  return (windows as Window[]).map((window) => (
-    <button
-      key={window.id}
-      className={`btn btn--taskbar ${window.show ? "btn--active" : ""}`}
-      onClick={() => toggleWindow(window.id)}
-    >
-      <div className="btn__icon">
-        <img src={window.icon} alt="windows 95 logo" />
-      </div>
-      <span>{window.name}</span>
-    </button>
-  ));
+  return (
+    <>
+      {(windows as Window[]).map((window) => (
+        <button
+          key={window.id}
+          className={`btn btn--taskbar ${window.show ? "btn--active" : ""}`}
+          onClick={() => toggleWindow(window.id)}
+        >
+          <div className="btn__icon">
+            <img src={window.icon} alt="windows 95 logo" />
+          </div>
+          <span>{window.name}</span>
+        </button>
+      ))}
+    </>
+  );
 };
 
 const StartMenu: React.FC<Props> = ({ windows }) => {
@@ -97,7 +101,7 @@ const StartMenu: React.FC<Props> = ({ windows }) => {
     <div className="start-menu">
       <StartMenuTemp />
       <ul className="apps-list">
-        {apps.apps.map((app) => (
+        {apps.map((app) => (
           <StartMenuItem
             onClick={() => handleClick(app.id, app.name, app.icon)}
             icon={app.icon}
