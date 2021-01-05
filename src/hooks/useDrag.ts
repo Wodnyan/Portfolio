@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useDrag = (ref: any) => {
+const useDrag = (ref: React.RefObject<HTMLElement>) => {
   const handleRef = useRef(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const useDrag = (ref: any) => {
     let initialX: number;
     let initialY: number;
 
-    function onMouseDown(e: React.MouseEvent) {
+    function onMouseDown(e: MouseEvent) {
       initialX = e.clientX - offsetX;
       initialY = e.clientY - offsetY;
       // If there is a handler and the target isn't the handler than do nothing
@@ -27,18 +27,18 @@ const useDrag = (ref: any) => {
       window.addEventListener("mousemove", onMouseMove);
     }
 
-    function onMouseUp(this: Window, _: MouseEvent) {
+    function onMouseUp(e: MouseEvent) {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
     }
 
-    function onMouseMove(this: Window, e: MouseEvent) {
+    function onMouseMove(e: MouseEvent) {
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
 
       offsetY = currentY;
       offsetX = currentX;
-      target.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      target!.style.transform = `translate(${currentX}px, ${currentY}px)`;
     }
 
     target.addEventListener("mousedown", onMouseDown);

@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import useDrag from "../hooks/useDrag";
+import React, { useRef } from "react"; import useDrag from "../hooks/useDrag";
 import { connect, useDispatch } from "react-redux";
 import { REMOVE_WINDOW } from "../redux/actions/windowsActions";
 
@@ -10,7 +9,6 @@ interface Props {
   minimizeBtn?: boolean;
   maximizeBtn?: boolean;
 }
-
 const Window: React.FC<Props> = ({
   id,
   maximizeBtn,

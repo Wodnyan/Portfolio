@@ -44,18 +44,22 @@ const ActiveApps = () => {
     dispatch(TOGGLE_WINDOW(id));
   };
 
-  return (windows as Window[]).map((window) => (
-    <button
-      key={window.id}
-      className={`btn btn--taskbar ${window.show ? "btn--active" : ""}`}
-      onClick={() => toggleWindow(window.id)}
-    >
-      <div className="btn__icon">
-        <img src={window.icon} alt="windows 95 logo" />
-      </div>
-      <span>{window.name}</span>
-    </button>
-  ));
+  return (
+    <>
+      {(windows as Window[]).map((window) => (
+        <button
+          key={window.id}
+          className={`btn btn--taskbar ${window.show ? "btn--active" : ""}`}
+          onClick={() => toggleWindow(window.id)}
+        >
+          <div className="btn__icon">
+            <img src={window.icon} alt="windows 95 logo" />
+          </div>
+          <span>{window.name}</span>
+        </button>
+      ))}
+    </>
+  );
 };
 
 const StartMenu: React.FC<Props> = ({ windows }) => {
